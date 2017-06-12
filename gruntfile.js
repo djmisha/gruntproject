@@ -5,24 +5,47 @@ module.exports = function(grunt) {
 
 		pkg: grunt.file.readJSON('package.json'),	
 
-		min: {
+		cssmin: {
 			dist: {
 				src:'css/*.css',
 				dest: 'style.min.css'
 			}
 		},
+
+
+		browserSync: {
+ 		  
+ 			bsFiles: {
+    	   		src : ['css/*.css', '*.css']
+   			},
+  			
+  			options: {
+        	
+        	server: {
+            
+            	baseDir: "./"
+			    
+			        }
+			    }
+			},
+
 		watch: {
 			files: ['css/*.css'],
-			tasks: ['min:dist']
+			tasks: ['cssmin:dist', 'browserSync']
 		}
 	});
 
 
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 
 	grunt.registerTask('default', [
-		'min:dist'
+
+		'cssmin:dist',		
+		'watch'
+		
 		]);
 }; 
