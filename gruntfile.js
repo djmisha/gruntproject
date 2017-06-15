@@ -1,40 +1,28 @@
 
 module.exports = function(grunt) {
-
 	grunt.initConfig ({
-
-		pkg: grunt.file.readJSON('package.json'),	
-
+		pkg: grunt.file.readJSON('package.json'),
 		cssmin: {
 			dist: {
 				src:'css/*.css',
 				dest: 'style.min.css'
 			}
 		},
-
-
 		browserSync: {
- 		  
  			bsFiles: {
     	   		src : ['css/*.css', '*.css']
    			},
-  			
   			options: {
-        	
-        	server: {
-            
+        		server: {
             	baseDir: "./"
-			    
 			        }
 			    }
 			},
-
 		watch: {
 			files: ['css/*.css'],
 			tasks: ['cssmin:dist', 'browserSync']
 		}
 	});
-
 
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
@@ -42,10 +30,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 
+	// Default Task
 	grunt.registerTask('default', [
-
-		'cssmin:dist',		
+		'cssmin:dist',
 		'watch'
-		
 		]);
-}; 
+};
